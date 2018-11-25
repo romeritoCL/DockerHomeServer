@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  ombi:
+    container_name: ombi
+    image: linuxserver/ombi
+    restart: always
+    volumes:
+      - ${USERDIR}/volumes/ombi:/config
+      - ${USERDIR}/volumes/shared:/shared
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=ombi
+      - traefik.frontend.rule=Host:ombi.${DOMAINNAME}
+      - traefik.port=3579
+      - traefik.docker.network=traefik_proxy
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.STSSeconds=315360000
+      - traefik.frontend.headers.browserXSSFilter=true
+      - traefik.frontend.headers.contentTypeNosniff=true
+      - traefik.frontend.headers.forceSTSHeader=true
+      - traefik.frontend.headers.SSLHost=example.com
+      - traefik.frontend.headers.STSIncludeSubdomains=true
+      - traefik.frontend.headers.STSPreload=true
+      - traefik.frontend.headers.frameDeny=true
+    networks:
+      - traefik_proxy
+networks:
+  traefik_proxy:
+    name: traefik_proxy

@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.env
+volumes
+!volumes/.gitkeep
+configuration/traefik/acme/acme.json
+#PHP STORM temp
+.idea

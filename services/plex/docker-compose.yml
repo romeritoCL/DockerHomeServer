@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+  plex:
+    container_name: plex
+    restart: always
+    image: plexinc/pms-docker
+    volumes:
+      - ${USERDIR}/volumes/plex/config:/config
+      - ${USERDIR}/volumes/plex/transcode_tmp:/transcode
+      - ${USERDIR}/volumes/shared:/shared
+      - ${TV_SERIES_DIR}:/data/tvshows
+      - ${MOVIES_DIR}:/data/movies
+    environment:
+      - TZ=${TIMEZONE}
+      - VERSION=latest
+      - HOSTNAME=${HOSTNAME}
+      - PLEX_UID=${PUID}
+      - PLEX_GID=${PGID}
+      - ADVERTISE_IP=${SERVER_IP}
+    ports:
+      - "32400:32400/tcp"
+    labels:
+      - traefik.enable=true
+      - traefik.backend=plex
+      - traefik.frontend.rule=Host:plex.${DOMAINNAME}
+      - traefik.port=32400
+      - traefik.docker.network=traefik_proxy
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.STSSeconds=315360000
+      - traefik.frontend.headers.browserXSSFilter=true
+      - traefik.frontend.headers.contentTypeNosniff=true
+      - traefik.frontend.headers.forceSTSHeader=true
+      - traefik.frontend.headers.SSLHost=example.com
+      - traefik.frontend.headers.STSIncludeSubdomains=true
+      - traefik.frontend.headers.STSPreload=true
+      - traefik.frontend.headers.frameDeny=true
+    networks:
+      - traefik_proxy
+networks:
+  traefik_proxy:
+    name: traefik_proxy

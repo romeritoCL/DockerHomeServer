@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  openvpn-sa:
+    image: linuxserver/openvpn-as
+    container_name: openvpn-sa
+    restart: always
+    volumes:
+      - ${USERDIR}/volumes/openvpn-sa:/config
+    environment:
+      - TZ=${TIMEZONE}
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - INTERFACE=${VPN_INTERFACE}
+    network_mode: host
+    privileged: true

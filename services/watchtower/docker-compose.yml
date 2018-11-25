@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  watchtower:
+    image: v2tec/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --schedule "0 0 4 * * *" --cleanup
+      - traefik.frontend.rule=Host:traefik.${DOMAINNAME}
+    networks:
+      - traefik_proxy
+networks:
+  traefik_proxy:
+    name: traefik_proxy

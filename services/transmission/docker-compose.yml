@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    restart: always
+    ports:
+      - "51413:51413"
+      - "51413:51413/udp"
+    volumes:
+      - ${USERDIR}/configuration/transmission/settings.json:/defaults/settings.json
+      - ${USERDIR}/volumes/transmission/config:/config
+      - ${USERDIR}/volumes/transmission/watch:/watch
+      - ${DOWNLOADS_DIR}:/downloads
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=transmission
+      - "traefik.frontend.rule=Host:transmission.${DOMAINNAME}; AddPrefix: /transmission"
+      - traefik.port=9091
+      - traefik.docker.network=traefik_proxy
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.STSSeconds=315360000
+      - traefik.frontend.headers.browserXSSFilter=true
+      - traefik.frontend.headers.contentTypeNosniff=true
+      - traefik.frontend.headers.forceSTSHeader=true
+      - traefik.frontend.headers.SSLHost=example.com
+      - traefik.frontend.headers.STSIncludeSubdomains=true
+      - traefik.frontend.headers.STSPreload=true
+      - traefik.frontend.headers.frameDeny=true
+    networks:
+      - traefik_proxy
+networks:
+  traefik_proxy:
+    name: traefik_proxy
