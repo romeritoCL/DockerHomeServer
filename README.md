@@ -57,3 +57,13 @@ You should go over each service and check it's up and configure
 it if necessary. All the configurations are going to be stored
 inside the "volumes" folder. You can regularly back it up.
 
+# 5. About SSL certificates
+
+If you need ssl certificates and you have a domain, there is an option
+to create it with Lets Encrypt. This repo is configured for using
+OVH as a domain name provider. If you dont use OVH you can change the
+configuration of ```traefik``` in order to use another one:
+
+https://docs.traefik.io/configuration/acme/
+
+Still this is a secondary step and will not stop your services from working.
