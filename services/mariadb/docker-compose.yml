@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  mariadb:
+    image: linuxserver/mariadb
+    container_name: mariadb
+    restart: always
+    volumes:
+      - ${USERDIR}/volumes/mariadb:/config
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASS}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    networks:
+      - traefik_proxy
+networks:
+  traefik_proxy:
+    name: traefik_proxy

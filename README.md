@@ -22,6 +22,7 @@ if necessary until you decide to stop them manually.
 ```bash
 docker-compose \
     -f services/traefik/docker-compose.yml \
+    -f services/mariadb/docker-compose.yml \
     -f services/jackett/docker-compose.yml \
     -f services/ddclient/docker-compose.yml \
     -f services/nextcloud/docker-compose.yml \
