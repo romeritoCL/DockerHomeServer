@@ -21,6 +21,7 @@ if necessary until you decide to stop them manually.
 
 ```bash
 docker-compose \
+    -f services/traefik/docker-compose.yml \
     -f services/jackett/docker-compose.yml \
     -f services/ddclient/docker-compose.yml \
     -f services/nextcloud/docker-compose.yml \
@@ -33,7 +34,6 @@ docker-compose \
     -f services/radarr/docker-compose.yml \
     -f services/sonarr/docker-compose.yml \
     -f services/tautulli/docker-compose.yml \
-    -f services/traefik/docker-compose.yml \
     -f services/transmission/docker-compose.yml \
     -f services/watchtower/docker-compose.yml \
     up -d
