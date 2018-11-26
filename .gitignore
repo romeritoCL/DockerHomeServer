@@ -1,5 +1,3 @@
 # Created by .ignore support plugin (hsz.mobi)
-volumes
-!volumes/.gitkeep
-configuration
 .idea
+volumes
