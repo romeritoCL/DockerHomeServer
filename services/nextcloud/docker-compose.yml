@@ -7,7 +7,7 @@ services:
     volumes:
       - ${USERDIR}/volumes/nextcloud:/config
       - ${DOWNLOADS_DIR}:/data
-      - ${USERDIR}/volumens/shared:/shared
+      - ${USERDIR}/volumes/shared:/shared
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
