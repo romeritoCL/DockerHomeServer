@@ -22,6 +22,8 @@ if necessary until you decide to stop them manually.
 ```bash
 docker-compose \
     -f services/jackett/docker-compose.yml \
+    -f services/ddclient/docker-compose.yml \
+    -f services/nextcloud/docker-compose.yml \
     -f services/minecraft/docker-compose.yml \
     -f services/ombi/docker-compose.yml \
     -f services/openvpn-sa/docker-compose.yml \

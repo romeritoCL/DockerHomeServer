@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-  portainer:
+  ddclient:
     image: linuxserver/ddclient
     container_name: ddclient
     restart: always
