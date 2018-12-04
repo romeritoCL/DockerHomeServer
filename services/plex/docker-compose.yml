@@ -3,7 +3,7 @@ services:
   plex:
     container_name: plex
     restart: always
-    image: plexinc/pms-docker
+    image: linuxserver/plex
     volumes:
       - ${USERDIR}/volumes/plex/config:/config
       - ${USERDIR}/volumes/plex/transcode_tmp:/transcode
@@ -11,22 +11,11 @@ services:
       - ${TV_SERIES_DIR}:/data/tvshows
       - ${MOVIES_DIR}:/data/movies
     environment:
-      - TZ=${TIMEZONE}
       - VERSION=latest
+      - TZ=${TIMEZONE}
       - PLEX_UID=${PUID}
       - PLEX_GID=${PGID}
-      - ADVERTISE_IP=${SERVER_IP}
-    hostname: ${HOSTNAME}
-    ports:
-      - "32400:32400/tcp"
-      - "3005:3005/tcp"
-      - "8324:8324/tcp"
-      - "32469:32469/tcp"
-      - "1900:1900/udp"
-      - "32410:32410/udp"
-      - "32412:32412/udp"
-      - "32413:32413/udp"
-      - "32414:32414/udp"
+    network_mode: host
     labels:
       - traefik.enable=true
       - traefik.backend=plex
