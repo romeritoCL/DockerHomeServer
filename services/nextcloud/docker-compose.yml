@@ -6,7 +6,7 @@ services:
     image: linuxserver/nextcloud
     volumes:
       - ${USERDIR}/volumes/nextcloud:/config
-      - ${DOWNLOADS_DIR}/nextcloud:/data
+      - ${USERDIR}/volumes/user-data:/data
       - ${USERDIR}/volumes/shared:/shared
     environment:
       - PUID=${PUID}
