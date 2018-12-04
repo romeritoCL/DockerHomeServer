@@ -19,6 +19,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.backend=transmission
+      - traefik.frontend.auth.basic.usersFile=/etc/traefik/.htpasswd
       - "traefik.frontend.rule=Host:transmission.${DOMAINNAME}; AddPrefix: /transmission"
       - traefik.port=9091
       - traefik.docker.network=traefik_proxy

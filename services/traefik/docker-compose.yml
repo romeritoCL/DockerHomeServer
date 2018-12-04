@@ -22,6 +22,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.backend=traefik
+      - traefik.frontend.auth.basic.usersFile=/etc/traefik/.htpasswd
       - traefik.docker.network=traefik_proxy
       - traefik.frontend.rule=Host:traefik.${DOMAINNAME}
       - traefik.port=8080
