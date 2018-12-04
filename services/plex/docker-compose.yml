@@ -11,8 +11,39 @@ services:
       - ${TV_SERIES_DIR}:/data/tvshows
       - ${MOVIES_DIR}:/data/movies
     environment:
-      - VERSION=latest
       - TZ=${TIMEZONE}
+      - VERSION=latest
       - PLEX_UID=${PUID}
       - PLEX_GID=${PGID}
-    network_mode: host
+      - ADVERTISE_IP=${SERVER_IP}
+    hostname: ${HOSTNAME}
+    ports:
+      - "32400:32400/tcp"
+      - "3005:3005/tcp"
+      - "8324:8324/tcp"
+      - "32469:32469/tcp"
+      - "1900:1900/udp"
+      - "32410:32410/udp"
+      - "32412:32412/udp"
+      - "32413:32413/udp"
+      - "32414:32414/udp"
+    labels:
+      - traefik.enable=true
+      - traefik.backend=plex
+      - traefik.frontend.rule=Host:plex.${DOMAINNAME}
+      - traefik.port=32400
+      - traefik.docker.network=traefik_proxy
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.STSSeconds=315360000
+      - traefik.frontend.headers.browserXSSFilter=true
+      - traefik.frontend.headers.contentTypeNosniff=true
+      - traefik.frontend.headers.forceSTSHeader=true
+      - traefik.frontend.headers.SSLHost=${DOMAINNAME}
+      - traefik.frontend.headers.STSIncludeSubdomains=true
+      - traefik.frontend.headers.STSPreload=true
+      - traefik.frontend.headers.frameDeny=true
+    networks:
+      - traefik_proxy
+networks:
+  traefik_proxy:
+    name: traefik_proxy
