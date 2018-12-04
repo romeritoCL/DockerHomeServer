@@ -25,7 +25,7 @@ services:
       - traefik.frontend.headers.SSLHost=${DOMAINNAME}
       - traefik.frontend.headers.STSIncludeSubdomains=true
       - traefik.frontend.headers.STSPreload=true
-      - traefik.frontend.headers.frameDeny=true
+      - traefik.frontend.headers.customFrameOptionsValue=SAMEORIGIN
     networks:
       - traefik_proxy
 networks:
