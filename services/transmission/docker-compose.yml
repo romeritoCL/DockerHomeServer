@@ -4,9 +4,6 @@ services:
     image: linuxserver/transmission
     container_name: transmission
     restart: always
-    ports:
-      - "51413:51413"
-      - "51413:51413/udp"
     volumes:
       - ${USERDIR}/configuration/transmission/settings.json:/defaults/settings.json
       - ${USERDIR}/volumes/transmission/config:/config
