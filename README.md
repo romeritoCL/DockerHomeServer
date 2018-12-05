@@ -36,6 +36,7 @@ docker-compose \
     -f services/tautulli/docker-compose.yml \
     -f services/transmission/docker-compose.yml \
     -f services/watchtower/docker-compose.yml \
+    -f services/webserver/docker-compose.yml \
     up -d
 ```
 

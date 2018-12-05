@@ -8,6 +8,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${USERDIR}/volumes/traefik:/etc/traefik
+      - ${USERDIR}/volumes/traefik/tmp:/tmp
       - ${USERDIR}/volumes/shared:/shared
     ports:
       - "80:80"
