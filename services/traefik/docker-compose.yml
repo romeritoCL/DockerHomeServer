@@ -7,7 +7,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${USERDIR}/configuration/traefik:/etc/traefik
+      - ${USERDIR}/volumes/traefik:/etc/traefik
       - ${USERDIR}/volumes/shared:/shared
     ports:
       - "80:80"
