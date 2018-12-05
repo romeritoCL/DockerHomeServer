@@ -1,15 +1,14 @@
 version: "3.7"
 services:
   ddclient:
-    image: linuxserver/ddclient
+    image: digrouz/ddclient
     container_name: ddclient
     restart: always
     volumes:
-      - ${USERDIR}/volumes/ddclient:/config
+      - ${USERDIR}/volumes/ddclient/ddclient.conf:/etc/ddclient/ddclient.conf
     environment:
-    - PUID=${PUID}
-    - PGID=${PGID}
-    - TZ=${TIMEZONE}
+    - DOCKUID=${PUID}
+    - DOCKGID=${PGID}
     networks:
       - traefik_proxy
 networks:
