@@ -5,7 +5,7 @@ services:
     container_name: ddclient
     restart: always
     volumes:
-      - ${USERDIR}/configuration/ddclient/ddclient.conf:/config/ddclient.conf:ro
+      - ${USERDIR}/volumes/ddclient/:/config/
     environment:
     - PUID=${PUID}
     - PGID=${PGID}

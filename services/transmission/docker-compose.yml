@@ -5,7 +5,7 @@ services:
     container_name: transmission
     restart: always
     volumes:
-      - ${USERDIR}/configuration/transmission/settings.json:/defaults/settings.json
+      - ${USERDIR}/volumes/transmission/settings.json:/defaults/settings.json
       - ${USERDIR}/volumes/transmission/config:/config
       - ${USERDIR}/volumes/transmission/watch:/watch
       - ${DOWNLOADS_DIR}:/downloads
