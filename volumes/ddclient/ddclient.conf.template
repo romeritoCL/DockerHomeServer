@@ -1,10 +1,12 @@
-daemon = 300 # check every 600 seconds 
-syslog = yes # log update msgs to syslog 
-
+daemon=300
+syslog=yes
+pid=/var/run/ddclient/ddclient.pid
+ssl=yes
+use=web, web=checkip.dyndns.org/, web-skip='IP Address' # found after IP Address
 protocol=dyndns2
-use=web, web=checkip.dyndns.com, web-skip='IP Address'
 server=www.ovh.com
-login=admin
+login=user
 password=password
 ssl=yes
-example.com
+host.example.com
+
