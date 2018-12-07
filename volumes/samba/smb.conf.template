@@ -1,0 +1,17 @@
+[global]
+min protocol = SMB2
+workgroup = WORKGROUP
+server string = FileSharing %v
+netbios name = HomeServer
+security = user
+map to guest = bad user
+dns proxy = no
+
+#============================ Share Definitions ============================== 
+[nas]
+comment = needs username and password to access
+path = /mnt
+browseable = yes
+guest ok = no
+writable = yes
+valid users = @smbgrp

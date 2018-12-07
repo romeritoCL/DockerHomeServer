@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  samba:
+    image: mossop/samba
+    container_name: samba
+    restart: always
+    volumes:
+      - ${USERDIR}/volumes/samba:/etc/samba
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+      - ${MOVIES_DIR}:/mnt/movies
+      - ${TV_SERIES_DIR}:/mnt/series
+    environment:
+      - TZ=${TIMEZONE}
+      - PGID=${PGID}
+      - PUID=${PUID}
+    network_mode: host
+
