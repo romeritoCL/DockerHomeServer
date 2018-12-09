@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - ${USERDIR}/volumes/jackett:/config
-      - ${DOWNLOADS_DIR}/complete:/downloads
+      - ${DOWNLOADS_DIR}:/downloads
       - ${USERDIR}/volumes/shared:/shared
     environment:
       - PUID=${PUID}

@@ -6,6 +6,7 @@ services:
     restart: always
     volumes:
       - ${USERDIR}/volumes/samba:/etc/samba
+      - ${USERDIR}/volumes/samba/config:/var/lib/samba/private
       - /etc/passwd:/etc/passwd:ro
       - /etc/group:/etc/group:ro
       - ${MOVIES_DIR}:/mnt/movies

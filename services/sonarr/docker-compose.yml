@@ -5,7 +5,7 @@ services:
     container_name: sonarr
     volumes:
       - ${USERDIR}/volumes/sonarr:/config
-      - ${DOWNLOADS_DIR}/complete:/downloads
+      - ${DOWNLOADS_DIR}:/downloads
       - ${TV_SERIES_DIR}:/tv
       - ${USERDIR}/volumes/shared:/shared
     restart: always

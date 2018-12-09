@@ -5,7 +5,7 @@ services:
     container_name: radarr
     volumes:
       - ${USERDIR}/volumes/radarr:/config
-      - ${DOWNLOADS_DIR}/complete:/downloads
+      - ${DOWNLOADS_DIR}:/downloads
       - ${MOVIES_DIR}:/movies
       - ${USERDIR}/volumes/shared:/shared
     restart: always
