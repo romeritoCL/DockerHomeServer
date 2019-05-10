@@ -6,7 +6,7 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    enviroment:
+    environment:
       - WATCHTOWER_NOTIFICATIONS=slack
       - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=${SLACK_WATCHTOWER}
     command: --interval 900
