@@ -9,7 +9,7 @@ services:
     environment:
       - WATCHTOWER_NOTIFICATIONS=slack
       - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=${SLACK_WATCHTOWER}
-    command: --interval 900
+    command: --interval 900 --cleanup
     networks:
       - traefik_proxy
 networks:
