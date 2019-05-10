@@ -6,8 +6,10 @@ services:
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --schedule "0 0 4 * * *" --cleanup
-      - traefik.frontend.rule=Host:traefik.${DOMAINNAME}
+    enviroment:
+      - WATCHTOWER_NOTIFICATIONS=slack
+      - WATCHTOWER_NOTIFICATION_SLACK_HOOK_URL=${SLACK_WATCHTOWER}
+    command: --interval 900
     networks:
       - traefik_proxy
 networks:
