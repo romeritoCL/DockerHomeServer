@@ -10,10 +10,8 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${USERDIR}/volumes/graylog/mongo/data:/data
-    networks:
-      - traefik_proxy
   graylog-elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.12
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
     container_name: graylog-elasticsearch
     restart: always
     environment:
@@ -22,11 +20,10 @@ services:
       - TZ=${TIMEZONE}
       - http.host=0.0.0.0
       - xpack.security.enabled=false
+      - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
       - ${USERDIR}/volumes/graylog/elasticsearch/data:/usr/share/elasticsearch/data
-    networks:
-      - traefik_proxy
   graylog:
     build:
       dockerfile: Dockerfile
