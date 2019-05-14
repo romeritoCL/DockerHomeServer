@@ -45,7 +45,7 @@ services:
     volumes:
       - ${USERDIR}/volumes/graylog/data/journal:/usr/share/graylog/data/journal
       - ${USERDIR}/services/graylog/graylog.conf:/usr/share/graylog/data/config/graylog.conf
-      - ${USERDIR}/services/graylog/udp-input-graylog.json /usr/share/graylog/data/contentpacks/udp-input-graylog.json
+      - ${USERDIR}/services/graylog/udp-input-graylog.json:/usr/share/graylog/data/contentpacks/udp-input-graylog.json
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
