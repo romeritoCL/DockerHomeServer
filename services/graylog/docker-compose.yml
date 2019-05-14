@@ -60,6 +60,8 @@ services:
       - traefik.frontend.headers.frameDeny=true
     networks:
       - traefik_proxy
+    extra_hosts:
+      - graylog.${DOMAINNAME}:127.0.0.1
 networks:
   traefik_proxy:
     name: traefik_proxy
