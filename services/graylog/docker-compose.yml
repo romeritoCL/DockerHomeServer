@@ -38,7 +38,7 @@ services:
     container_name: graylog
     restart: always
     volumes:
-      - ${USERDIR}/volumes/graylog/data/config:/usr/share/graylog/data/config
+      - ${USERDIR}/volumes/graylog/data/journal:/usr/share/graylog/data/journal
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
