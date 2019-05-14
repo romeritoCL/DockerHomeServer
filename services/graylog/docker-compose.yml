@@ -1,0 +1,71 @@
+version: "3.7"
+services:
+
+  graylog-mongo:
+    image: mongo:3
+    container_name: graylog-mongo
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    volumes:
+      - ${USERDIR}/volumes/graylog/mongo/data:/data
+      - ${USERDIR}/volumes/shared:/shared
+
+  graylog-elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.12
+    container_name: graylog-elasticsearch
+    restart: always
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+      - http.host=0.0.0.0
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ${USERDIR}/volumes/graylog/elasticsearch/data:/usr/share/elasticsearch/data
+      - ${USERDIR}/volumes/shared:/shared
+
+  graylog:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      - GRAYLOG_WEB_ENDPOINT_URI=http://127.0.0.1:9000/api
+    links:
+      - graylog-mongo
+      - graylog-elasticsearch
+    container_name: graylog
+    restart: always
+    volumes:
+      - ${USERDIR}/volumes/graylog/data/config:/usr/share/graylog/data/config
+      - ${USERDIR}/volumes/shared:/shared
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TIMEZONE}
+    labels:
+      - traefik.enable=true
+      - traefik.backend=graylog
+      - traefik.frontend.rule=Host:graylog.${DOMAINNAME}
+      - traefik.port=9000
+      - traefik.docker.network=traefik_proxy
+      - traefik.frontend.headers.SSLRedirect=true
+      - traefik.frontend.headers.STSSeconds=315360000
+      - traefik.frontend.headers.browserXSSFilter=true
+      - traefik.frontend.headers.contentTypeNosniff=true
+      - traefik.frontend.headers.forceSTSHeader=true
+      - traefik.frontend.headers.SSLHost=${DOMAINNAME}
+      - traefik.frontend.headers.STSIncludeSubdomains=true
+      - traefik.frontend.headers.STSPreload=true
+      - traefik.frontend.headers.frameDeny=true
+    networks:
+      - traefik_proxy
+networks:
+  traefik_proxy:
+    name: traefik_proxy
+
