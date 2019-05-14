@@ -1,4 +1,4 @@
-FROM graylog2/server:latest
+FROM graylog/graylog
 
 COPY udp-input-graylog.json /usr/share/graylog/data/contentpacks/udp-input-graylog.json
 COPY graylog.conf /usr/share/graylog/data/config/graylog.conf
