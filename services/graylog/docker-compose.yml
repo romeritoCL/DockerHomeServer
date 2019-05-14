@@ -10,6 +10,8 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${USERDIR}/volumes/graylog/mongo/data:/data
+    networks:
+      - graylog_proxy
   graylog-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
     container_name: graylog-elasticsearch
@@ -24,6 +26,8 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
       - ${USERDIR}/volumes/graylog/elasticsearch/data:/usr/share/elasticsearch/data
+    networks:
+      - graylog_proxy
   graylog:
     build:
       dockerfile: Dockerfile
@@ -32,7 +36,7 @@ services:
       - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
       - GRAYLOG_WEB_ENDPOINT_URI=http://127.0.0.1:9000/api
-    links:
+    depends:
       - graylog-mongo
       - graylog-elasticsearch
     container_name: graylog
@@ -60,9 +64,11 @@ services:
       - traefik.frontend.headers.frameDeny=true
     networks:
       - traefik_proxy
+      - graylog_proxy
     extra_hosts:
       - graylog.${DOMAINNAME}:127.0.0.1
 networks:
+  graylog_proxy:
+    name: graylog_proxy
   traefik_proxy:
     name: traefik_proxy
-
