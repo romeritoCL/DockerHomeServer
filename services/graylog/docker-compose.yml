@@ -1,6 +1,5 @@
 version: "3.7"
 services:
-
   graylog-mongo:
     image: mongo:3
     container_name: graylog-mongo
@@ -11,8 +10,8 @@ services:
       - TZ=${TIMEZONE}
     volumes:
       - ${USERDIR}/volumes/graylog/mongo/data:/data
-      - ${USERDIR}/volumes/shared:/shared
-
+    networks:
+      - traefik_proxy
   graylog-elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:5.6.12
     container_name: graylog-elasticsearch
@@ -26,12 +25,12 @@ services:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
       - ${USERDIR}/volumes/graylog/elasticsearch/data:/usr/share/elasticsearch/data
-      - ${USERDIR}/volumes/shared:/shared
-
+    networks:
+      - traefik_proxy
   graylog:
     build:
       dockerfile: Dockerfile
-      context: .
+      context: ${USERDIR}/services/graylog
     environment:
       - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
@@ -43,7 +42,6 @@ services:
     restart: always
     volumes:
       - ${USERDIR}/volumes/graylog/data/config:/usr/share/graylog/data/config
-      - ${USERDIR}/volumes/shared:/shared
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
