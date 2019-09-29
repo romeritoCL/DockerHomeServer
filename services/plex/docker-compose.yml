@@ -13,6 +13,8 @@ services:
     environment:
       - TZ=${TIMEZONE}
       - VERSION=latest
+      - PUID=${PUID}
+      - PGID=${PGID}
       - PLEX_UID=${PUID}
       - PLEX_GID=${PGID}
       - ADVERTISE_IP=${SERVER_IP}
