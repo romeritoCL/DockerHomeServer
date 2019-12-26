@@ -11,9 +11,6 @@ services:
       - PGID=${PGID}
       - PUID=${PUID}
       - INTERFACE=${VPN_INTERFACE}
-    ports:
-      - 943:943
-      - 9443:9443
-      - 1194:1194/udp
-    cap_add:
-      - NET_ADMIN
+    network_mode: host
+    privileged: true
+
