@@ -38,6 +38,7 @@ docker-compose \
     -f services/watchtower/docker-compose.yml \
     -f services/webserver/docker-compose.yml \
     -f services/samba/docker-compose.yml \
+    -f services/speedtest/docker-compose.yml \
     up -d
 ```
 
