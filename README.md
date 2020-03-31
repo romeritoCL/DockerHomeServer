@@ -28,7 +28,6 @@ docker-compose \
     -f services/nextcloud/docker-compose.yml \
     -f services/minecraft/docker-compose.yml \
     -f services/ombi/docker-compose.yml \
-    -f services/openvpn-sa/docker-compose.yml \
     -f services/plex/docker-compose.yml \
     -f services/portainer/docker-compose.yml \
     -f services/radarr/docker-compose.yml \
