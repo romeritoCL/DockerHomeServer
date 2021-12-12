@@ -26,6 +26,7 @@ docker-compose \
     -f services/plex/docker-compose.yml \
     -f services/transmission/docker-compose.yml \
     -f services/watchtower/docker-compose.yml \
+    -f services/tautulli/docker-compose.yml \
     -f services/samba/docker-compose.yml \
     up -d
 ```
