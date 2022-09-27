@@ -1,8 +1,10 @@
+
 version: "3.7"
 services:
   traefik:
     hostname: traefik
-    image: traefik:v1.7-alpine
+    image: traefik:v1.7
+    command: --api --docker
     container_name: traefik
     restart: always
     volumes:
@@ -13,6 +15,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "0880:8080"
     networks:
       - traefik_proxy
     environment:
